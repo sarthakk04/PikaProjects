@@ -6,7 +6,7 @@ import Image from 'next/image';
 import 'animate.css';
 import { useState } from "react";
 import Head from 'next/head';
-
+import NewlyAdded from './NewlyAdded';
 
   
 const Hero = () => {
@@ -91,155 +91,30 @@ const [isAnimating, setIsAnimating] = useState(false);
       </div>
 
       {/* Newly Added Header */}
-      <div className="flex justify-center items-center mb-8">
-        <div className="flex items-center space-x-2">
-          <div className="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center">
-            <div className="w-4 h-4 bg-white rounded-full"></div>
-          </div>
-          <h2 className="text-2xl font-bold text-black">Newly Added</h2>
-          <div className="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center">
-            <div className="w-4 h-4 bg-white rounded-full"></div>
-          </div>
-        </div>
-      </div>
-
-      {/* Cards Section with Parallax Background */}
-      <div className="parallax min-h-16 py-12" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80')" }}>
-        <div className="container mx-auto px-4">
-          <div className="flex flex-wrap justify-center gap-6">
-            {/* Card 1 */}
-            <div className="bg-yellow-400 border-4 border-black rounded-lg p-4 w-64 shadow-lg">
-              <div className="bg-blue-600 text-white px-2 py-1 rounded text-xs font-bold mb-2">Hotel Management</div>
-              <div className="bg-yellow-300 text-black px-2 py-1 rounded text-xs font-bold mb-2 inline-block">NEW</div>
-              
-              {/* Card Image Area */}
-              <div className="bg-white rounded p-4 mb-3">
-                <div className="text-center">
-                  <div className="text-sm font-bold mb-2">Hotel Booking Management</div>
-                  <div className="bg-gray-200 h-16 rounded mb-2 flex items-center justify-center">
-                    <span className="text-xs text-gray-500">Hotel Image</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Bottom Section */}
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <div className="w-6 h-6 bg-black"></div>
-                  <span className="text-sm font-bold">#webDevelopment</span>
-                </div>
-              </div>
-              
-              <div className="flex items-center mt-2">
-                <div className="flex items-center mr-4">
-                  <span className="text-yellow-600 text-lg">★</span>
-                  <span className="text-xs ml-1">MERIT STACK</span>
-                </div>
-              </div>
-              
-              <div className="text-right mt-2">
-                <span className="text-sm font-bold">300 INR</span>
-              </div>
-            </div>
-
-            {/* Card 2 */}
-            <div className="bg-yellow-400 border-4 border-black rounded-lg p-4 w-64 shadow-lg">
-              <div className="bg-blue-600 text-white px-2 py-1 rounded text-xs font-bold mb-2">Hotel Management</div>
-              <div className="bg-yellow-300 text-black px-2 py-1 rounded text-xs font-bold mb-2 inline-block">NEW</div>
-              
-              {/* Card Image Area */}
-              <div className="bg-white rounded p-4 mb-3">
-                <div className="text-center">
-                  <div className="text-sm font-bold mb-2">Hotel Booking Management</div>
-                  <div className="bg-gray-200 h-16 rounded mb-2 flex items-center justify-center">
-                    <span className="text-xs text-gray-500">Hotel Image</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Bottom Section */}
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <div className="w-6 h-6 bg-black"></div>
-                  <span className="text-sm font-bold">#webDevelopment</span>
-                </div>
-              </div>
-              
-              <div className="flex items-center mt-2">
-                <div className="flex items-center mr-4">
-                  <span className="text-yellow-600 text-lg">★</span>
-                  <span className="text-xs ml-1">MERIT STACK</span>
-                </div>
-              </div>
-              
-              <div className="text-right mt-2">
-                <span className="text-sm font-bold">300 INR</span>
-              </div>
-            </div>
-
-            {/* Card 3 */}
-            <div className="bg-yellow-400 border-4 border-black rounded-lg p-4 w-64 shadow-lg">
-              <div className="bg-blue-600 text-white px-2 py-1 rounded text-xs font-bold mb-2">Hotel Management</div>
-              <div className="bg-yellow-300 text-black px-2 py-1 rounded text-xs font-bold mb-2 inline-block">NEW</div>
-              
-              {/* Card Image Area */}
-              <div className="bg-white rounded p-4 mb-3">
-                <div className="text-center">
-                  <div className="text-sm font-bold mb-2">Hotel Booking Management</div>
-                  <div className="bg-gray-200 h-16 rounded mb-2 flex items-center justify-center">
-                    <span className="text-xs text-gray-500">Hotel Image</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Bottom Section */}
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <div className="w-6 h-6 bg-black"></div>
-                  <span className="text-sm font-bold">#webDevelopment</span>
-                </div>
-              </div>
-              
-              <div className="flex items-center mt-2">
-                <div className="flex items-center mr-4">
-                  <span className="text-yellow-600 text-lg">★</span>
-                  <span className="text-xs ml-1">MERIT STACK</span>
-                </div>
-              </div>
-              
-              <div className="text-right mt-2">
-                <span className="text-sm font-bold">300 INR</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Dots Indicator */}
-          <div className="flex justify-center mt-8 space-x-2">
-            <div className="w-2 h-2 bg-black rounded-full"></div>
-            <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
-            <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
-          </div>
-        </div>
-      </div>
+     
+      <NewlyAdded/>
 
       {/* Buy/Sell Section */}
-      <div className="relative h-96 overflow-hidden">
-        <img 
-          src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
-          alt="Pokemon Characters" 
-          className="w-full h-full object-cover"
-        />
-        
-        {/* Red overlay for Buy */}
-        <div className="absolute top-0 left-0 w-1/2 h-full bg-red-500 bg-opacity-80 flex items-center justify-center">
-          <h2 className="text-6xl font-bold text-yellow-300">Buy</h2>
-        </div>
-        
-        {/* Yellow overlay for Sell */}
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-yellow-400 bg-opacity-80 flex items-center justify-center">
-          <h2 className="text-6xl font-bold text-black">Sell</h2>
-        </div>
-      </div>
+<div className="relative h-96 max-w-full mx-auto overflow-hidden">
+  <img 
+    src="/assets/BuySellBg.png"
+    alt="Background"
+    className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[1200px] h-full object-cover object-center z-0"
+  />
+
+  <div className="relative z-10 flex h-full max-w-[1000px] mx-auto gap-x-12 px-4">
+    <div className="w-1/2 flex items-center justify-center">
+      <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-yellow-400">Buy</h2>
+    </div>
+    <div className="w-1/2 flex items-center justify-center">
+      <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-black">Sell</h2>
+    </div>
+  </div>
+</div>
+
+
+
+
 
       {/* Bottom Pokemon Characters Section */}
       <div 
