@@ -1,0 +1,1 @@
+// Configuration of the firebase with the next app 
