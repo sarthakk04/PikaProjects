@@ -7,7 +7,7 @@ import 'animate.css';
 import { useState } from "react";
 import Head from 'next/head';
 import NewlyAdded from './NewlyAdded';
-
+import Navbar from '../Navbar';
   
 const Hero = () => {
 const [isAnimating, setIsAnimating] = useState(false);
@@ -19,6 +19,9 @@ const [isAnimating, setIsAnimating] = useState(false);
   };
   return (
     <>
+    <div>
+      <Navbar/>
+    </div>
     <div className="relative w-full h-[400px] overflow-hidden bg-black text-white">
       {/* Background dots */}
       <div style={{ width: '100%', height: '400px', position: 'absolute', top: 0, left: 0, zIndex: 0 }}>
@@ -38,16 +41,16 @@ const [isAnimating, setIsAnimating] = useState(false);
       {/* Content */}
       <div className="relative z-10 flex items-center justify-between h-full px-10">
         {/* Left Image (fit height) */}
-          <div className="relative h-[600px] w-[460px]">
+          {/* <div className="relative h-[600px] w-[460px]">
           <Image
             src="/assets/left-image.png"
             alt="Left Icon"
             fill
           />
-        </div>
+        </div> */}
 
         {/* Center Text */}
-        <div className="text-center -ml-20 z-10">
+        <div className="text-center z-10">
           <h1 className="text-5xl font-bold z-6" style={{ fontFamily: 'pikachuBold' }}>Welcome to PikaProjects</h1>
           <p className="text-lg mt-4" style={{ fontFamily: 'pikachuNormal' }}>Claim your project now..!</p>
         </div>
