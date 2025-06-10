@@ -62,7 +62,7 @@ const ProjectCard = ({ project }) => {
             <button className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-medium py-2 px-4 rounded-lg transition-all duration-200 transform hover:scale-105">
               🛒Cart
             </button>
-            <button className="bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-2 px-4 rounded-lg transition-all duration-200">
+            <button className="bg-yellow-100 hover:bg-red-200 text-gray-700 font-medium py-2 px-4 rounded-lg transition-all duration-200">
               👁️ Preview
             </button>
           </div>
