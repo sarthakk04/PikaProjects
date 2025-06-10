@@ -24,3 +24,17 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@font-face {
+  font-family: 'pikachuNormal';
+  src: url('/fonts/Pokemon Hollow.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'pikachuBold';
+  src: url('/fonts/Pokemon Solid.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
