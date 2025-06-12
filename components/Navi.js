@@ -1,6 +1,6 @@
 "use client";
 import React from 'react';
-import GooeyNav from './ReactBits/GooeyNav';
+import GooeyNav from './reactbits/GooeyNav';
 
 const Navbar = () => {
   const items = [
@@ -14,7 +14,8 @@ const Navbar = () => {
   className="mt-3 w-full flex justify-center items-center"
   style={{ height: '50px', position: 'relative' }}
 >
-  <GooeyNav
+  
+  {/* <GooeyNav
     items={items}
     particleCount={15}
     particleDistances={[90, 10]}
@@ -22,8 +23,9 @@ const Navbar = () => {
     initialActiveIndex={0}
     animationTime={600}
     timeVariance={300}
-    colors={[1, 2, 1, 2, 1, 2]}
-  />
+       colors={[1, 2, 1, 2, 1, 2]}
+
+  /> */}
 </div>
 
   );
