@@ -344,8 +344,8 @@ const cardsData = [
 
 // Individual Card Component with funky Pokemon style
 const Card = ({ card }) => (
-  <div className="px-3">
-    <div className="bg-yellow-300 border-4 border-black rounded-lg p-6 w-80 h-96 mx-auto shadow-lg transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:rotate-1 hover:scale-105 relative overflow-hidden">
+  <div className="px-3 ">
+    <div className="bg-yellow-300 border-4 border-black rounded-lg p-6 w-70 h-96 mx-auto shadow-lg transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:rotate-1 hover:scale-105 relative overflow-hidden">
       {/* Funky diagonal stripe */}
       <div className="absolute top-0 right-0 w-32 h-32 bg-red-500 transform rotate-45 translate-x-16 -translate-y-8 opacity-20"></div>
       
