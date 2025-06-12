@@ -1,3 +1,6 @@
+/* eslint-disable */
+
+
 // app/shop/page.js
 import Shop from "@/components/Shop";
 

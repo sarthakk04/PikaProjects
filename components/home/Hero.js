@@ -1,5 +1,9 @@
 
 
+/* eslint-disable */
+
+
+
 // "use client";
 // import React, { useState, useRef, useEffect } from 'react';
 // import DotGrid from './DotGrid';

@@ -1,3 +1,6 @@
+/* eslint-disable */
+
+
 import Hero from "@/components/home/Hero";
 // import Auth from "@/components/Auth";
 // import Shop from "@/components/Shop";

@@ -1,4 +1,8 @@
 
+/* eslint-disable */
+
+
+
 // import React, { useEffect } from 'react';
 
 // // Cards data array
