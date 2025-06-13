@@ -1,26 +1,104 @@
 "use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function Auth() {
   const [isLogin, setIsLogin] = useState(true);
+  const [loading, setLoading] = useState(false);
+
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    confirmPassword: '',
-    trainerName: ''
+    email: "",
+    password: "",
+    confirmPassword: "",
+    trainerName: "",
   });
 
   const handleInputChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+
+    if (!isLogin) {
+      if (formData.password !== formData.confirmPassword) {
+        alert("Passwords do not match!");
+        return;
+      }
+
+      if (!formData.trainerName || !formData.email || !formData.password) {
+        alert("Please fill all fields.");
+        return;
+      }
+
+      setLoading(true);
+
+      try {
+        const res = await fetch("/api/users/buyers", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            b_name: formData.trainerName,
+            b_email: formData.email,
+            b_password: formData.password,
+          }),
+        });
+
+        const result = await res.json();
+
+        if (res.ok && result.status === "success") {
+          alert(`Signup successful! Your Buyer ID is ${result.bid}`);
+          setIsLogin(true);
+          setFormData({
+            email: "",
+            password: "",
+            confirmPassword: "",
+            trainerName: "",
+          });
+        } else {
+          alert(result.message || "Signup failed.");
+        }
+      } catch (error) {
+        console.error("Signup Error:", error);
+        alert("An error occurred during signup.");
+      } finally {
+        setLoading(false);
+      }
+    } else {
+      setLoading(true);
+
+      try {
+        const response = await fetch("/api/users/buyers/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            b_email: formData.email,
+            b_password: formData.password,
+          }),
+        });
+
+        const result = await response.json();
+
+        if (result.status === "success") {
+          alert("Login successful!");
+          // Save user info in localStorage or redirect to dashboard
+          // localStorage.setItem("buyerId", result.bid);
+          // router.push("/dashboard");
+        } else {
+          alert(result.message || "Invalid email or password.");
+        }
+      } catch (error) {
+        console.error("Login error:", error);
+        alert("Something went wrong during login.");
+      }
+
+      setLoading(false);
+    }
   };
 
   return (
@@ -46,7 +124,7 @@ export default function Auth() {
         <div className="relative">
           {/* Animated Border */}
           <div className="absolute -inset-1 bg-gradient-to-r from-red-500 via-yellow-500 to-blue-500 rounded-3xl blur opacity-75 animate-pulse"></div>
-          
+
           {/* Main Form Container */}
           <div className="relative bg-yellow-400/90 backdrop-blur-lg rounded-3xl p-8 shadow-2xl border border-yellow-300/50">
             {/* Pokemon Logo Area */}
@@ -76,8 +154,8 @@ export default function Auth() {
                 onClick={() => setIsLogin(true)}
                 className={`flex-1 py-2 px-4 rounded-full text-sm font-medium transition-all duration-300 ${
                   isLogin
-                    ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg'
-                    : 'text-gray-700 hover:text-gray-900'
+                    ? "bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg"
+                    : "text-gray-700 hover:text-gray-900"
                 }`}
               >
                 Login
@@ -86,8 +164,8 @@ export default function Auth() {
                 onClick={() => setIsLogin(false)}
                 className={`flex-1 py-2 px-4 rounded-full text-sm font-medium transition-all duration-300 ${
                   !isLogin
-                    ? 'bg-gradient-to-r from-red-500 to-pink-600 text-white shadow-lg'
-                    : 'text-gray-700 hover:text-gray-900'
+                    ? "bg-gradient-to-r from-red-500 to-pink-600 text-white shadow-lg"
+                    : "text-gray-700 hover:text-gray-900"
                 }`}
               >
                 Sign Up
@@ -157,7 +235,7 @@ export default function Auth() {
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <div className="relative bg-gradient-to-r from-red-500 to-yellow-500 hover:from-blue-600 hover:to-purple-600 text-white font-bold py-4 px-6 rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg">
                   <span className="relative z-10">
-                    {isLogin ? '🚀 Start Journey' : '⚡ Become Trainer'}
+                    {isLogin ? "🚀 Start Journey" : "⚡ Become Trainer"}
                   </span>
                 </div>
               </button>
@@ -183,17 +261,23 @@ export default function Auth() {
                   <div className="w-full border-t border-gray-600"></div>
                 </div>
                 <div className="relative flex justify-center text-sm">
-                  <span className="px-2 bg-transparent text-gray-700">Or continue with</span>
+                  <span className="px-2 bg-transparent text-gray-700">
+                    Or continue with
+                  </span>
                 </div>
               </div>
-              
+
               <div className="grid grid-cols-2 gap-3">
                 <button className="flex items-center justify-center px-4 py-2 border border-yellow-600/30 rounded-xl bg-yellow-300/30 hover:bg-yellow-300/50 transition-all duration-200 group">
-                  <span className="text-2xl mr-2 group-hover:scale-110 transition-transform duration-200">🔥</span>
+                  <span className="text-2xl mr-2 group-hover:scale-110 transition-transform duration-200">
+                    🔥
+                  </span>
                   <span className="text-gray-800 text-sm">Google</span>
                 </button>
                 <button className="flex items-center justify-center px-4 py-2 border border-yellow-600/30 rounded-xl bg-yellow-300/30 hover:bg-yellow-300/50 transition-all duration-200 group">
-                  <span className="text-2xl mr-2 group-hover:scale-110 transition-transform duration-200">⚡</span>
+                  <span className="text-2xl mr-2 group-hover:scale-110 transition-transform duration-200">
+                    ⚡
+                  </span>
                   <span className="text-gray-800 text-sm">GitHub</span>
                 </button>
               </div>
