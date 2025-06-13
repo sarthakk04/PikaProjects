@@ -1,6 +1,10 @@
+/* eslint-disable */
+
+
 "use client";
 
 import { useState } from 'react';
+import Navbar from './Navi';
 
 // Project Card Component
 const ProjectCard = ({ project }) => {
@@ -191,7 +195,10 @@ export default function PokemonShop() {
   });
 
   return (
+<>
+<Navbar/>
     <div className="min-h-screen bg-gray-50">
+
       {/* Top Banner */}
       <div className="relative h-64 bg-white border-b border-gray-200 overflow-hidden">
         {/* Subtle Background */}
@@ -406,6 +413,7 @@ export default function PokemonShop() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 // "use client";
