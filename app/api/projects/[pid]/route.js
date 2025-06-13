@@ -1,21 +1,36 @@
 import { NextResponse } from "next/server";
-import { getProject } from "@/lib/firestore";
+import { updateProject, deleteProject, getProject } from "@/lib/firestore";
 
-// GET /api/projects/:pid
-export async function GET(_, { params }) {
-  const { pid } = await params;
+export async function GET(req, { params }) {
+  const { pid } = params;
+  const project = await getProject(pid);
+  if (!project)
+    return NextResponse.json(
+      { status: "error", message: "Not found" },
+      { status: 404 }
+    );
+  return NextResponse.json({ status: "success", project });
+}
 
+export async function PUT(req, { params }) {
+  const { pid } = params;
+  const data = await req.json();
   try {
-    const project = await getProject(pid);
+    await updateProject(pid, data);
+    return NextResponse.json({ status: "success", message: "Project updated" });
+  } catch (err) {
+    return NextResponse.json(
+      { status: "error", message: err.message },
+      { status: 500 }
+    );
+  }
+}
 
-    if (!project) {
-      return NextResponse.json(
-        { status: "error", message: "Project not found" },
-        { status: 404 }
-      );
-    }
-
-    return NextResponse.json({ status: "success", project });
+export async function DELETE(_, { params }) {
+  const { pid } = params;
+  try {
+    await deleteProject(pid);
+    return NextResponse.json({ status: "success", message: "Project deleted" });
   } catch (err) {
     return NextResponse.json(
       { status: "error", message: err.message },
