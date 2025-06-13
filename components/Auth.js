@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { auth, googleProvider, githubProvider } from "@/firebase/config";
+import { signInWithPopup } from "firebase/auth";
 
 export default function Auth() {
   const [isLogin, setIsLogin] = useState(true);
@@ -12,6 +14,50 @@ export default function Auth() {
     confirmPassword: "",
     trainerName: "",
   });
+
+  const handleGoogleLogin = async () => {
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      const user = result.user;
+      console.log("Google user:", user);
+      await fetch("/api/users/buyers", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          b_name: user.displayName,
+          b_email: user.email,
+          b_password: "", // Not needed for social login
+          registeredAt: new Date().toISOString(),
+        }),
+      });
+    } catch (error) {
+      console.error("Google Sign-In Error:", error);
+    }
+  };
+
+  const handleGitHubLogin = async () => {
+    try {
+      const result = await signInWithPopup(auth, githubProvider);
+      const user = result.user;
+      console.log("GitHub user:", user);
+      await fetch("/api/users/buyers", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          b_name: user.displayName,
+          b_email: user.email,
+          b_password: "", // Not needed for social login
+          registeredAt: new Date().toISOString(),
+        }),
+      });
+    } catch (error) {
+      console.error("GitHub Sign-In Error:", error);
+    }
+  };
 
   const handleInputChange = (e) => {
     setFormData({
@@ -268,13 +314,19 @@ export default function Auth() {
               </div>
 
               <div className="grid grid-cols-2 gap-3">
-                <button className="flex items-center justify-center px-4 py-2 border border-yellow-600/30 rounded-xl bg-yellow-300/30 hover:bg-yellow-300/50 transition-all duration-200 group">
+                <button
+                  className="flex items-center justify-center px-4 py-2 border border-yellow-600/30 rounded-xl bg-yellow-300/30 hover:bg-yellow-300/50 transition-all duration-200 group"
+                  onClick={handleGoogleLogin}
+                >
                   <span className="text-2xl mr-2 group-hover:scale-110 transition-transform duration-200">
                     🔥
                   </span>
                   <span className="text-gray-800 text-sm">Google</span>
                 </button>
-                <button className="flex items-center justify-center px-4 py-2 border border-yellow-600/30 rounded-xl bg-yellow-300/30 hover:bg-yellow-300/50 transition-all duration-200 group">
+                <button
+                  className="flex items-center justify-center px-4 py-2 border border-yellow-600/30 rounded-xl bg-yellow-300/30 hover:bg-yellow-300/50 transition-all duration-200 group"
+                  onClick={handleGitHubLogin}
+                >
                   <span className="text-2xl mr-2 group-hover:scale-110 transition-transform duration-200">
                     ⚡
                   </span>
