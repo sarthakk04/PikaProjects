@@ -1,15 +1,15 @@
 /* eslint-disable */
 
 // import Hero from "@/components/home/Hero";
-import Auth from "@/components/Auth";
+// import Auth from "@/components/Auth";
 // import Shop from "@/components/Shop";
-// import ProductDetails from "@/components/ProductDetails";
+import ProductDetails from "@/components/ProductDetails";
 
 export default function Home() {
   return (
     <>
-      {/* <ProductDetails/> */}
-      <Auth />
+      <ProductDetails/>
+      {/* <Auth /> */}
       {/* <Shop/> */}
     </>
   );

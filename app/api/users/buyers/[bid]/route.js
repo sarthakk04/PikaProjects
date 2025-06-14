@@ -10,7 +10,7 @@ export async function GET(req, context) {
       return NextResponse.json(
         { status: "error", message: "Not found" },
         { status: 404 }
-      );
+      );  
     }
     return NextResponse.json({ status: "success", buyer });
   } catch (err) {
