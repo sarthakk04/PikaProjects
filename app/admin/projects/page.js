@@ -1,5 +1,4 @@
-// app/shop/page.js
-import Admin from "@/components/admin/Admin";
+import Project from "@/components/admin/Projects";
 
 export const metadata = {
   title: 'Shop - PikaProjects',
@@ -7,5 +6,5 @@ export const metadata = {
 };
 
 export default function ShopPage() {
-  return <Admin />;
+  return <Project/>;
 }
