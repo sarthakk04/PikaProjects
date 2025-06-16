@@ -1,21 +1,43 @@
 "use client";
 
-import { 
-  Users, 
-  Edit, 
-  Trash2, 
-  Plus, 
-  Eye,
-  Search
-} from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { Users, Edit, Trash2, Plus, Eye, Search } from 'lucide-react';
 
 export default function BuyersPage() {
-  const dummyBuyers = [
-    { id: 1, name: 'Ash Ketchum', email: 'ash@pokemon.com', totalSpent: 1250, joinDate: '2024-01-15', status: 'Active' },
-    { id: 2, name: 'Misty Waterflower', email: 'misty@cerulean.com', totalSpent: 890, joinDate: '2024-02-20', status: 'Active' },
-    { id: 3, name: 'Brock Harrison', email: 'brock@pewter.com', totalSpent: 2100, joinDate: '2023-12-10', status: 'Inactive' },
-    { id: 4, name: 'Team Rocket', email: 'rocket@evil.com', totalSpent: 450, joinDate: '2024-03-01', status: 'Suspended' }
-  ];
+  const [buyers, setBuyers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState('');
+
+  useEffect(() => {
+    const fetchBuyers = async () => {
+      try {
+        const response = await fetch('/api/users/buyers/login');
+        if (!response.ok) {
+          throw new Error('Failed to fetch buyers');
+        }
+        const data = await response.json();
+        setBuyers(data.data || []);
+      } catch (error) {
+        console.error("Error fetching buyers:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBuyers();
+  }, []);
+  const filteredBuyers = buyers.filter(buyer => 
+    buyer.b_name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    buyer.b_email?.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-64">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
@@ -28,6 +50,8 @@ export default function BuyersPage() {
               type="text" 
               placeholder="Search buyers..." 
               className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
           <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center space-x-2">
@@ -51,28 +75,38 @@ export default function BuyersPage() {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {dummyBuyers.map((buyer) => (
-                <tr key={buyer.id} className="hover:bg-blue-50">
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{buyer.name}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{buyer.email}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-green-600 font-medium">${buyer.totalSpent}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{buyer.joinDate}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-                      buyer.status === 'Active' ? 'bg-green-100 text-green-800' :
-                      buyer.status === 'Inactive' ? 'bg-gray-100 text-gray-800' :
-                      'bg-red-100 text-red-800'
-                    }`}>
-                      {buyer.status}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
-                    <button className="text-blue-600 hover:text-blue-900"><Eye className="w-4 h-4" /></button>
-                    <button className="text-yellow-600 hover:text-yellow-900"><Edit className="w-4 h-4" /></button>
-                    <button className="text-red-600 hover:text-red-900"><Trash2 className="w-4 h-4" /></button>
+              {filteredBuyers.length > 0 ? (
+                filteredBuyers.map((buyer) => (
+                  <tr key={buyer.id} className="hover:bg-blue-50">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{buyer.b_name}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{buyer.b_email}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-green-600 font-medium">${buyer.totalSpent || 0}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {buyer.joinDate || new Date(buyer.createdAt?.toDate()).toLocaleDateString() || 'N/A'}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
+                        buyer.status === 'Active' ? 'bg-green-100 text-green-800' :
+                        buyer.status === 'Inactive' ? 'bg-gray-100 text-gray-800' :
+                        'bg-red-100 text-red-800'
+                      }`}>
+                        {buyer.status || 'Active'}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
+                      <button className="text-blue-600 hover:text-blue-900"><Eye className="w-4 h-4" /></button>
+                      <button className="text-yellow-600 hover:text-yellow-900"><Edit className="w-4 h-4" /></button>
+                      <button className="text-red-600 hover:text-red-900"><Trash2 className="w-4 h-4" /></button>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="6" className="px-6 py-4 text-center text-sm text-gray-500">
+                    {buyers.length === 0 ? 'No buyers found' : 'No matching buyers found'}
                   </td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
         </div>

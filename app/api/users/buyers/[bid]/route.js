@@ -1,3 +1,5 @@
+//api/users/buyers/[bid]/route.js
+
 import { NextResponse } from "next/server";
 import {
   updateBuyer,

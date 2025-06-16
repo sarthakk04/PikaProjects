@@ -1,5 +1,7 @@
+//api/users/buyers/login
+
 import { NextResponse } from "next/server";
-import { getBuyerByEmail } from "../../../../../lib/firestore"; // Adjust path if needed
+import { getBuyerByEmail,getAllBuyers } from "../../../../../lib/firestore"; // Adjust path if needed
 import bcrypt from "bcryptjs";
 
 export async function POST(req) {
@@ -43,6 +45,26 @@ export async function POST(req) {
   } catch (err) {
     return NextResponse.json(
       { status: "error", message: err.message || "Internal Server Error" },
+      { status: 500 }
+    );
+  }
+}
+// New GET handler to fetch all buyers
+export async function GET() {
+  try {
+    const buyers = await getAllBuyers();
+    
+    // Return the buyers data
+    return NextResponse.json(
+      { 
+        status: "success", 
+        data: buyers 
+      },
+      { status: 200 }
+    );
+  } catch (err) {
+    return NextResponse.json(
+      { status: "error", message: err.message || "Failed to fetch buyers" },
       { status: 500 }
     );
   }
