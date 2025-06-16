@@ -1,5 +1,5 @@
 // app/shop/page.js
-import Admin from "@/components/admin/Admin";
+import Amin from "@/components/admin/Admin";
 
 export const metadata = {
   title: 'Shop - PikaProjects',

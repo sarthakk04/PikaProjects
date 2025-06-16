@@ -28,6 +28,8 @@ const ProjectCard = ({ project }) => {
   const { image: imageUrl } = media;
 
   return (
+
+
     <div className="group relative bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-200">
       {/* Subtle Border Animation */}
       <div className="absolute -inset-1 bg-gradient-to-r from-gray-200 via-blue-100 to-gray-200 rounded-2xl blur opacity-0 group-hover:opacity-50 transition duration-300"></div>
