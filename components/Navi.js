@@ -116,10 +116,11 @@ const Navi = () => {
                   </a>
                 ))}
                 <div className="pt-4 border-t border-white/20">
-                  <button className="w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-4 py-2 rounded-lg hover:shadow-lg transition-all duration-300 font-medium">
+                  <a href='/login'><button className="w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-4 py-2 rounded-lg hover:shadow-lg transition-all duration-300 font-medium">
                     <User className="w-4 h-4" />
                     <span>Login</span>
                   </button>
+                  </a>
                 </div>
               </div>
             </div>
