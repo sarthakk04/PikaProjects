@@ -1,5 +1,9 @@
 import { NextResponse } from "next/server";
-import { updateBuyer, deleteBuyer, getBuyer } from "@/lib/firestore";
+import {
+  updateBuyer,
+  deleteBuyer,
+  getBuyer,
+} from "../../../../../lib/firestore";
 
 // GET /api/users/buyers/:bid
 export async function GET(req, context) {
@@ -10,7 +14,7 @@ export async function GET(req, context) {
       return NextResponse.json(
         { status: "error", message: "Not found" },
         { status: 404 }
-      );  
+      );
     }
     return NextResponse.json({ status: "success", buyer });
   } catch (err) {

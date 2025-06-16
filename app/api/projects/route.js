@@ -87,12 +87,12 @@
 // }
 
 import { NextResponse } from "next/server";
-import { addProject, getAllProjects, getProjectsCount } from "@/lib/firestore";
+import { addProject, getAllProjects } from "../../../lib/firestore";
 
 export async function POST(req) {
   try {
     const body = await req.json();
-    
+
     // Validate required fields
     if (!body.p_name || !body.p_price || !body.p_category || !body.p_info) {
       return NextResponse.json(
@@ -101,30 +101,13 @@ export async function POST(req) {
       );
     }
 
-    // ID generation with fallback
-    let pid;
-    try {
-      const count = await getProjectsCount();
-      pid = `P${(count + 1).toString().padStart(3, '0')}`;
-    } catch (error) {
-      console.error("Using fallback ID generation:", error);
-      pid = `P${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
-    }
+    const { pid, data } = body;
+    await addProject(pid, data);
 
-    const projectData = {
-      id: pid,
-      ...body,
-      created_at: new Date().toISOString(),
-      updated_at: new Date().toISOString()
-    };
-
-    await addProject(pid, projectData);
-    
     return NextResponse.json(
       { status: "success", pid, data: projectData },
       { status: 201 }
     );
-    
   } catch (err) {
     console.error("POST error:", err);
     return NextResponse.json(
@@ -141,14 +124,21 @@ export async function POST(req) {
 export async function GET() {
   try {
     const projects = await getAllProjects();
+
     return NextResponse.json(
-      { status: "success", data: projects },
+      {
+        status: "success",
+        data: projects, // More consistent naming
+      },
       { status: 200 }
     );
   } catch (err) {
     console.error("GET error:", err);
     return NextResponse.json(
-      { status: "error", message: "Failed to fetch projects" },
+      {
+        status: "error",
+        message: err.message || "Failed to fetch projects",
+      },
       { status: 500 }
     );
   }

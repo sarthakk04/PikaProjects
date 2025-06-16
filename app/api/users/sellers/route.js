@@ -1,6 +1,6 @@
 // app/api/projects/route.js
 import { NextResponse } from "next/server";
-import { addSeller } from "@/lib/firestore";
+import { addSeller } from "../../../../lib/firestore";
 
 export async function POST(req) {
   const body = await req.json();
