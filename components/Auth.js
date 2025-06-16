@@ -2,7 +2,7 @@
 "use client";
 
 import { useState } from "react";
-import { auth, googleProvider, githubProvider } from "@/firebase/config";
+import { auth, googleProvider, githubProvider } from "../firebase/config";
 import { signInWithPopup } from "firebase/auth";
 
 export default function Auth() {

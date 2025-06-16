@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getBuyerByEmail } from "@/lib/firestore"; // Adjust path if needed
+import { getBuyerByEmail } from "../../../../../lib/firestore"; // Adjust path if needed
 import bcrypt from "bcryptjs";
 
 export async function POST(req) {

@@ -1,11 +1,13 @@
-// app/shop/page.js
-import Admin from "../../components/Admin";
-
+import Login from "../../components/Auth";
 export const metadata = {
   title: "Shop - PikaProjects",
   description: "Browse and purchase amazing projects from our marketplace",
 };
 
-export default function ShopPage() {
-  return <Admin />;
+export default function LoginPage() {
+  return (
+    <>
+      <Login />
+    </>
+  );
 }

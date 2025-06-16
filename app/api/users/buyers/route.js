@@ -1,6 +1,10 @@
 // app/api/users/buyers/route.js
 import { NextResponse } from "next/server";
-import { addBuyer, getBuyerByEmail, getNextBuyerId } from "@/lib/firestore";
+import {
+  addBuyer,
+  getBuyerByEmail,
+  getNextBuyerId,
+} from "../../../../lib/firestore";
 import bcrypt from "bcryptjs";
 
 export async function POST(req) {

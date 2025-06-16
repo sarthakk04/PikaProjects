@@ -12,14 +12,8 @@
     "@react-three/drei": "^10.1.2",
     "@react-three/fiber": "^9.1.2",
     "animate.css": "^4.1.1",
-<<<<<<< HEAD
-    "bcrypt": "^6.0.0",
-    "bcryptjs": "^3.0.2",
-    "firebase": "^11.9.0",
-=======
     "bcryptjs": "^3.0.2",
     "firebase": "^11.9.1",
->>>>>>> origin/master
     "gsap": "^3.13.0",
     "lucide-react": "^0.513.0",
     "next": "15.3.3",
@@ -30,12 +24,9 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
-<<<<<<< HEAD
-=======
     "@types/node": "24.0.0",
     "@types/react": "19.1.7",
     "eslint": "^9",
->>>>>>> origin/master
     "eslint-config-next": "15.3.3",
     "tailwindcss": "^4"
   }
