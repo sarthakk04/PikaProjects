@@ -1,4 +1,4 @@
-import Project from "@/components/admin/Projects";
+import Project from "../../../components/admin/Projects";
 
 export const metadata = {
   title: 'Shop - PikaProjects',

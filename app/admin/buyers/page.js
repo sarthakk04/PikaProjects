@@ -1,4 +1,4 @@
-import BuyersPage from "@/components/admin/Buyers";
+import BuyersPage from "../../../components/admin/Buyers";
 
 export const metadata = {
   title: 'Shop - PikaProjects',
