@@ -477,24 +477,16 @@
 
 // export default Hero;
 "use client";
-import React, { useState, useRef, useEffect } from "react";
-import DotGrid from "./DotGrid";
-import "animate.css";
-import Head from "next/head";
-import NewlyAdded from "./NewlyAdded";
-import Navbar from "../Navi";
-import {
-  ChevronDown,
-  ChevronUp,
-  Star,
-  Trophy,
-  Users,
-  Zap,
-  Shield,
-  Rocket,
-} from "lucide-react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, useGLTF } from "@react-three/drei";
+import React, { useState, useRef, useEffect } from 'react';
+import DotGrid from './DotGrid';
+import Image from 'next/image';
+import 'animate.css';
+import Head from 'next/head';
+import NewlyAdded from './NewlyAdded';
+import Navbar from '../Navi';
+import { ChevronDown, ChevronUp, Star, Trophy, Users, Zap, Shield, Rocket } from 'lucide-react';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { OrbitControls, useGLTF } from '@react-three/drei';
 import Footer from "../Footer";
 
 // GLTF/GLB Model Component
@@ -524,34 +516,22 @@ function Pokeball3D({ mousePosition }) {
 
 // Floating Pokemon Icons Component
 const FloatingPokemon = () => {
-  const pokemonIcons = ["⚡", "🔥", "💧", "🌿", "🌙", "❄️"];
-  const [iconStyles, setIconStyles] = useState([]);
-
-  useEffect(() => {
-    const styles = pokemonIcons.map((icon, index) => ({
-      icon,
-      left: `${Math.random() * 100}%`,
-      top: `${Math.random() * 100}%`,
-      animationDelay: `${index * 0.5}s`,
-      animationDuration: `${2 + Math.random() * 20}s`,
-    }));
-    setIconStyles(styles);
-  }, []);
-
+  const pokemonIcons = ['⚡', '🔥', '💧', '🌿', '🌙', '❄️'];
+  
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {iconStyles.map((style, index) => (
+      {pokemonIcons.map((icon, index) => (
         <div
           key={index}
-          className="absolute text-2xl animate-bounce opacity-20"
+          className={`absolute text-2xl animate-bounce opacity-20`}
           style={{
-            left: style.left,
-            top: style.top,
-            animationDelay: style.animationDelay,
-            animationDuration: style.animationDuration,
+            left: `${Math.random() * 100}%`,
+            top: `${Math.random() * 100}%`,
+            animationDelay: `${index * 0.5}s`,
+            animationDuration: `${2 + Math.random() * 20}s`
           }}
         >
-          {style.icon}
+          {icon}
         </div>
       ))}
     </div>
@@ -584,7 +564,7 @@ const StatsCounter = ({ number, label, icon }) => {
   useEffect(() => {
     if (isVisible) {
       const timer = setInterval(() => {
-        setCount((prev) => {
+        setCount(prev => {
           if (prev < number) {
             return prev + Math.ceil(number / 50);
           }
@@ -597,26 +577,17 @@ const StatsCounter = ({ number, label, icon }) => {
   }, [isVisible, number]);
 
   return (
-    <div
-      ref={ref}
-      className="group text-center bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-all duration-500 cursor-pointer hover:scale-105 hover:-translate-y-2 hover:shadow-2xl relative overflow-hidden"
-    >
+    <div ref={ref} className="group text-center bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-all duration-500 cursor-pointer hover:scale-105 hover:-translate-y-2 hover:shadow-2xl relative overflow-hidden">
       {/* Animated border */}
       <div className="absolute inset-0 rounded-xl border-2 border-white/0 group-hover:border-white/30 transition-all duration-500"></div>
-
+      
       {/* Glow effect */}
       <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-yellow-400/0 to-red-400/0 group-hover:from-yellow-400/20 group-hover:to-red-400/20 transition-all duration-500"></div>
-
+      
       <div className="relative z-10">
-        <div className="text-3xl mb-2 group-hover:scale-125 transition-transform duration-300">
-          {icon}
-        </div>
-        <div className="text-3xl font-bold text-white mb-1 group-hover:text-yellow-200 transition-colors duration-300">
-          {count.toLocaleString()}+
-        </div>
-        <div className="text-sm text-white/80 group-hover:text-white transition-colors duration-300">
-          {label}
-        </div>
+        <div className="text-3xl mb-2 group-hover:scale-125 transition-transform duration-300">{icon}</div>
+        <div className="text-3xl font-bold text-white mb-1 group-hover:text-yellow-200 transition-colors duration-300">{count.toLocaleString()}+</div>
+        <div className="text-sm text-white/80 group-hover:text-white transition-colors duration-300">{label}</div>
       </div>
     </div>
   );
@@ -624,16 +595,10 @@ const StatsCounter = ({ number, label, icon }) => {
 
 // Pokemon Element Badge Component
 const ElementBadge = ({ element, color, emoji }) => (
-  <div
-    className={`group flex items-center gap-2 ${color} px-4 py-2 rounded-full text-black font-semibold text-sm hover:scale-110 transition-all duration-300 cursor-pointer hover:shadow-lg relative overflow-hidden`}
-  >
+  <div className={`group flex items-center gap-2 ${color} px-4 py-2 rounded-full text-black font-semibold text-sm hover:scale-110 transition-all duration-300 cursor-pointer hover:shadow-lg relative overflow-hidden`}>
     <div className="absolute inset-0 bg-white/0 group-hover:bg-white/20 transition-all duration-300 rounded-full"></div>
-    <span className="text-lg group-hover:animate-bounce relative z-10">
-      {emoji}
-    </span>
-    <span className="relative z-10 group-hover:font-bold transition-all duration-300">
-      {element}
-    </span>
+    <span className="text-lg group-hover:animate-bounce relative z-10">{emoji}</span>
+    <span className="relative z-10 group-hover:font-bold transition-all duration-300">{element}</span>
   </div>
 );
 
@@ -658,78 +623,67 @@ const Hero = () => {
     {
       id: 1,
       question: "What types of projects do you offer?",
-      answer:
-        "We offer a wide variety of projects including Web Development, Mobile Apps, AI/ML solutions, E-commerce platforms, and custom software development. Each project is crafted with care and attention to detail.",
+      answer: "We offer a wide variety of projects including Web Development, Mobile Apps, AI/ML solutions, E-commerce platforms, and custom software development. Each project is crafted with care and attention to detail."
     },
     {
       id: 2,
       question: "How do I purchase a project?",
-      answer:
-        "Simply browse our project gallery, select the one that fits your needs, and follow our secure checkout process. You'll receive all source code, documentation, and support materials instantly.",
+      answer: "Simply browse our project gallery, select the one that fits your needs, and follow our secure checkout process. You'll receive all source code, documentation, and support materials instantly."
     },
     {
       id: 3,
       question: "Do you provide post-purchase support?",
-      answer:
-        "Yes! We provide comprehensive support including documentation, setup guides, and technical assistance to help you implement and customize your project successfully.",
+      answer: "Yes! We provide comprehensive support including documentation, setup guides, and technical assistance to help you implement and customize your project successfully."
     },
     {
       id: 4,
       question: "Can projects be customized?",
-      answer:
-        "Absolutely! Most of our projects come with detailed documentation and are designed to be easily customizable. We also offer custom development services for specific requirements.",
+      answer: "Absolutely! Most of our projects come with detailed documentation and are designed to be easily customizable. We also offer custom development services for specific requirements."
     },
     {
       id: 5,
       question: "What technologies do you use?",
-      answer:
-        "We work with modern technologies including React, Next.js, Python, Node.js, AI/ML frameworks, and many more. Each project uses industry-standard best practices and cutting-edge tools.",
-    },
+      answer: "We work with modern technologies including React, Next.js, Python, Node.js, AI/ML frameworks, and many more. Each project uses industry-standard best practices and cutting-edge tools."
+    }
   ];
 
   const whyChooseUsItems = [
     {
       icon: <Trophy className="w-8 h-8" />,
       title: "Premium Quality",
-      description:
-        "All our projects are built with industry-standard practices and thoroughly tested",
-      color: "bg-yellow-400",
+      description: "All our projects are built with industry-standard practices and thoroughly tested",
+      color: "bg-yellow-400"
     },
     {
       icon: <Zap className="w-8 h-8" />,
       title: "Lightning Fast",
-      description:
-        "Get your project instantly after purchase with immediate download access",
-      color: "bg-orange-400",
+      description: "Get your project instantly after purchase with immediate download access",
+      color: "bg-orange-400"
     },
     {
       icon: <Shield className="w-8 h-8" />,
       title: "Secure & Reliable",
-      description:
-        "100% secure transactions with lifetime access to your purchased projects",
-      color: "bg-red-400",
+      description: "100% secure transactions with lifetime access to your purchased projects",
+      color: "bg-red-400"
     },
     {
       icon: <Users className="w-8 h-8" />,
       title: "Community Support",
-      description:
-        "Join our thriving community of developers and get help when you need it",
-      color: "bg-blue-400",
+      description: "Join our thriving community of developers and get help when you need it",
+      color: "bg-blue-400"
     },
     {
       icon: <Rocket className="w-8 h-8" />,
       title: "Ready to Deploy",
-      description:
-        "All projects come production-ready with deployment guides and documentation",
-      color: "bg-green-400",
+      description: "All projects come production-ready with deployment guides and documentation",
+      color: "bg-green-400"
     },
     {
       icon: <Star className="w-8 h-8" />,
       title: "Regular Updates",
-      description:
-        "Get free updates and improvements to keep your projects current",
-      color: "bg-purple-400",
-    },
+      description: "Get free updates and improvements to keep your projects current",
+      color: "bg-purple-400"
+    }
   ];
 
   useEffect(() => {
@@ -766,22 +720,12 @@ const Hero = () => {
       <div>
         <Navbar />
       </div>
-
+      
       {/* Hero Section with Enhanced Background */}
       <div className="relative w-full h-[300px] md:h-[700px] overflow-hidden bg-yellow text-white">
         <FloatingPokemon />
-
-        <div
-          style={{
-            width: "100%",
-            height: "100%",
-            position: "absolute",
-            top: 0,
-            left: 0,
-            zIndex: 0,
-          }}
-          className="bg-yellow"
-        >
+        
+        <div style={{ width: '100%', height: '100%', position: 'absolute', top: 0, left: 0, zIndex: 0 }} className='bg-yellow'>
           <DotGrid
             dotSize={2}
             gap={73}
@@ -798,19 +742,13 @@ const Hero = () => {
 
         <div className="relative z-10 flex flex-col md:flex-row items-center justify-between h-full px-4 md:px-10">
           <div className="text-center md:text-left z-10 mt-8 md:mt-0">
-            <h1
-              className="text-3xl sm:text-4xl md:text-7xl font-bold z-6 "
-              style={{ fontFamily: "pikachuBold" }}
-            >
+            <h1 className="text-3xl sm:text-4xl md:text-7xl font-bold z-6 " style={{ fontFamily: 'pikachuBold' }}>
               Welcome to PikaProjects
             </h1>
-            <p
-              className="text-base md:text-4xl mt-12 md:mt-12"
-              style={{ fontFamily: "pikachuNormal" }}
-            >
+            <p className="text-base md:text-4xl mt-12 md:mt-12" style={{ fontFamily: 'pikachuNormal' }}>
               Claim your project now..! ⚡
             </p>
-
+            
             {/* Pokemon Elements */}
             <div className="flex flex-wrap gap-2 mt-12 justify-center md:justify-start">
               <ElementBadge element="Web Dev" color="bg-green-400" emoji="🌿" />
@@ -825,10 +763,10 @@ const Hero = () => {
             }`}
             onMouseEnter={handleMouseEnter}
           >
-            <img
-              src="https://www.reef2reef.com/attachments/e9eho5l-gif.880287/"
-              alt="Pikachu"
-              fill="true"
+            <img 
+              src="https://www.reef2reef.com/attachments/e9eho5l-gif.880287/" 
+              alt="Pikachu" 
+              fill 
               className="object-contain drop-shadow-2xl"
             />
           </div>
@@ -870,29 +808,19 @@ const Hero = () => {
 
           {/* Pokeball decorations */}
           <div className="absolute top-4 left-4 w-8 h-8 bg-red-500 rounded-full opacity-50 animate-pulse"></div>
-          <div
-            className="absolute top-8 right-8 w-6 h-6 bg-yellow-400 rounded-full opacity-50 animate-pulse"
-            style={{ animationDelay: "1s" }}
-          ></div>
-          <div
-            className="absolute bottom-4 left-1/4 w-4 h-4 bg-blue-400 rounded-full opacity-50 animate-pulse"
-            style={{ animationDelay: "2s" }}
-          ></div>
+          <div className="absolute top-8 right-8 w-6 h-6 bg-yellow-400 rounded-full opacity-50 animate-pulse" style={{animationDelay: '1s'}}></div>
+          <div className="absolute bottom-4 left-1/4 w-4 h-4 bg-blue-400 rounded-full opacity-50 animate-pulse" style={{animationDelay: '2s'}}></div>
 
           <div className="relative z-10 flex h-full max-w-[1000px] mx-auto gap-x-4 sm:gap-x-8 md:gap-x-12 px-4">
             <div className="w-1/2 flex items-center justify-center">
               <div className="text-center">
-                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-yellow-400 mb-2">
-                  Buy
-                </h2>
+                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-yellow-400 mb-2">Buy</h2>
                 <p className="text-sm text-yellow-300">Premium Projects</p>
               </div>
             </div>
             <div className="w-1/2 flex items-center justify-center">
               <div className="text-center">
-                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-2">
-                  Sell
-                </h2>
+                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-2">Sell</h2>
                 <p className="text-sm text-gray-700">Your Creations</p>
               </div>
             </div>
@@ -903,15 +831,11 @@ const Hero = () => {
         <div className="py-16 bg-gradient-to-br from-[#E5FFFE] to-[#B3F5FF]">
           <div className="max-w-6xl mx-auto px-4">
             <div className="text-center mb-12">
-              <h2
-                className="text-4xl md:text-5xl font-bold text-gray-800 mb-4"
-                style={{ fontFamily: "pikachuBold" }}
-              >
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4" style={{ fontFamily: 'pikachuBold' }}>
                 Why Choose PikaProjects? ⚡
               </h2>
               <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                Join thousands of developers who trust us for their project
-                needs
+                Join thousands of developers who trust us for their project needs
               </p>
             </div>
 
@@ -923,24 +847,18 @@ const Hero = () => {
                 >
                   {/* Animated background gradient */}
                   <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/0 to-orange-400/0 group-hover:from-yellow-400/10 group-hover:to-orange-400/10 transition-all duration-500"></div>
-
+                  
                   {/* Shimmer effect */}
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-500">
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out"></div>
                   </div>
-
+                  
                   <div className="relative z-10">
-                    <div
-                      className={`w-16 h-16 ${item.color} rounded-full flex items-center justify-center mb-4 text-white group-hover:scale-110 group-hover:rotate-12 transition-all duration-300 shadow-lg group-hover:shadow-xl`}
-                    >
+                    <div className={`w-16 h-16 ${item.color} rounded-full flex items-center justify-center mb-4 text-white group-hover:scale-110 group-hover:rotate-12 transition-all duration-300 shadow-lg group-hover:shadow-xl`}>
                       {item.icon}
                     </div>
-                    <h3 className="text-xl font-bold text-gray-800 mb-3 group-hover:text-gray-900 transition-colors duration-300">
-                      {item.title}
-                    </h3>
-                    <p className="text-gray-600 leading-relaxed group-hover:text-gray-700 transition-colors duration-300">
-                      {item.description}
-                    </p>
+                    <h3 className="text-xl font-bold text-gray-800 mb-3 group-hover:text-gray-900 transition-colors duration-300">{item.title}</h3>
+                    <p className="text-gray-600 leading-relaxed group-hover:text-gray-700 transition-colors duration-300">{item.description}</p>
                   </div>
                 </div>
               ))}
@@ -983,15 +901,10 @@ const Hero = () => {
               {/* Right side - FAQ Section */}
               <div className="w-full lg:w-1/2 space-y-4 sm:space-y-6">
                 <div className="text-center lg:text-left mb-6 sm:mb-8">
-                  <h1
-                    className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-2"
-                    style={{ fontFamily: "pikachuBold" }}
-                  >
+                  <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-2" style={{ fontFamily: 'pikachuBold' }}>
                     FAQ's ❓
                   </h1>
-                  <p className="text-lg sm:text-xl text-gray-700">
-                    Everything you need to know about our projects
-                  </p>
+                  <p className="text-lg sm:text-xl text-gray-700">Everything you need to know about our projects</p>
                 </div>
 
                 <div className="space-y-3 sm:space-y-4">
@@ -1040,53 +953,34 @@ const Hero = () => {
           {/* Animated background elements */}
           <div className="absolute inset-0">
             <div className="absolute top-10 left-10 w-20 h-20 bg-yellow-400/20 rounded-full animate-pulse"></div>
-            <div
-              className="absolute top-32 right-20 w-16 h-16 bg-red-400/20 rounded-full animate-bounce"
-              style={{ animationDelay: "1s" }}
-            ></div>
-            <div
-              className="absolute bottom-20 left-1/4 w-12 h-12 bg-blue-400/20 rounded-full animate-ping"
-              style={{ animationDelay: "2s" }}
-            ></div>
-            <div
-              className="absolute bottom-32 right-1/3 w-24 h-24 bg-green-400/20 rounded-full animate-pulse"
-              style={{ animationDelay: "0.5s" }}
-            ></div>
+            <div className="absolute top-32 right-20 w-16 h-16 bg-red-400/20 rounded-full animate-bounce" style={{animationDelay: '1s'}}></div>
+            <div className="absolute bottom-20 left-1/4 w-12 h-12 bg-blue-400/20 rounded-full animate-ping" style={{animationDelay: '2s'}}></div>
+            <div className="absolute bottom-32 right-1/3 w-24 h-24 bg-green-400/20 rounded-full animate-pulse" style={{animationDelay: '0.5s'}}></div>
           </div>
-
+          
           <div className="max-w-4xl mx-auto text-center px-4 relative z-10">
-            <h2
-              className="text-4xl md:text-5xl font-bold text-gray-800 mb-4"
-              style={{ fontFamily: "pikachuBold" }}
-            >
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4" style={{ fontFamily: 'pikachuBold' }}>
               Ready to Start Your Journey? 🚀
             </h2>
             <p className="text-xl text-gray-600 mb-8">
-              Join thousands of developers who've already chosen PikaProjects
-              for their success
+              Join thousands of developers who've already chosen PikaProjects for their success
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button className="group relative bg-gradient-to-r from-yellow-400 to-orange-500 text-gray-800 px-8 py-4 rounded-full font-bold text-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 overflow-hidden">
                 <span className="absolute inset-0 bg-gradient-to-r from-red-400 to-yellow-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                <span className="relative z-10 group-hover:text-white transition-colors duration-300">
-                  Browse Projects ⚡
-                </span>
+                <span className="relative z-10 group-hover:text-white transition-colors duration-300">Browse Projects ⚡</span>
                 <div className="absolute inset-0 rounded-full bg-white/20 scale-0 group-hover:scale-100 transition-transform duration-500 ease-out"></div>
               </button>
               <button className="group relative border-2 border-gray-800 text-gray-800 px-8 py-4 rounded-full font-bold text-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 overflow-hidden">
                 <span className="absolute inset-0 bg-gradient-to-r from-red-500 to-yellow-500 -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out"></span>
-                <span className="relative z-10 group-hover:text-white transition-colors duration-300">
-                  Start Selling 💪
-                </span>
+                <span className="relative z-10 group-hover:text-white transition-colors duration-300">Start Selling 💪</span>
               </button>
             </div>
           </div>
         </div>
       </div>
-      <div
-        className="bg-gradient-to-b from-yellow-400 to-yellow-400 py-12
-"
-      >
+            <div className="bg-gradient-to-b from-yellow-400 to-yellow-400 py-12
+">
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             <StatsCounter number={500} label="Projects Sold" icon="🏆" />
@@ -1096,7 +990,7 @@ const Hero = () => {
           </div>
         </div>
       </div>
-      <Footer />
+      <Footer/>
     </>
   );
 };

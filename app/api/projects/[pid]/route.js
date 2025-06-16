@@ -1,3 +1,5 @@
+// api/projects/[pid]/route.js
+
 import { NextResponse } from "next/server";
 import { updateProject, deleteProject, getProject } from "@/lib/firestore";
 
