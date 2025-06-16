@@ -1,5 +1,9 @@
 import { NextResponse } from "next/server";
-import { updateSeller, deleteSeller, getSeller } from "@/lib/firestore";
+import {
+  updateSeller,
+  deleteSeller,
+  getSeller,
+} from "../../../../../lib/firestore";
 
 // GET /api/users/Sellers/:sid
 export async function GET(req, context) {

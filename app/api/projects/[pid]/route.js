@@ -1,7 +1,11 @@
 // api/projects/[pid]/route.js
 
 import { NextResponse } from "next/server";
-import { updateProject, deleteProject, getProject } from "@/lib/firestore";
+import {
+  updateProject,
+  deleteProject,
+  getProject,
+} from "../../../../lib/firestore";
 
 export async function GET(req, { params }) {
   const { pid } = params;

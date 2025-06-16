@@ -14,7 +14,6 @@
 //   }
 // }
 
-
 // export async function GET() {
 //   try {
 //     const projects = await getAllProjects();
@@ -28,12 +27,12 @@
 // }
 
 import { NextResponse } from "next/server";
-import { addProject, getAllProjects } from "@/lib/firestore";
+import { addProject, getAllProjects } from "../../../lib/firestore";
 
 export async function POST(req) {
   try {
     const body = await req.json();
-    
+
     // Validate required fields
     if (!body.pid || !body.data) {
       return NextResponse.json(
@@ -44,12 +43,11 @@ export async function POST(req) {
 
     const { pid, data } = body;
     await addProject(pid, data);
-    
+
     return NextResponse.json(
       { status: "success", pid },
       { status: 201 } // 201 Created for successful POST
     );
-    
   } catch (err) {
     console.error("POST /api/projects error:", err);
     return NextResponse.json(
@@ -62,21 +60,20 @@ export async function POST(req) {
 export async function GET() {
   try {
     const projects = await getAllProjects();
-    
+
     return NextResponse.json(
-      { 
-        status: "success", 
-        data: projects // More consistent naming
+      {
+        status: "success",
+        data: projects, // More consistent naming
       },
       { status: 200 }
     );
-    
   } catch (err) {
     console.error("GET /api/projects error:", err);
     return NextResponse.json(
-      { 
-        status: "error", 
-        message: err.message || "Failed to fetch projects"
+      {
+        status: "error",
+        message: err.message || "Failed to fetch projects",
       },
       { status: 500 }
     );
