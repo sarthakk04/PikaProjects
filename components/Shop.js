@@ -8,7 +8,7 @@
 import { useState, useEffect } from 'react';
 import Navbar from "./Navi"
 import Image from 'next/image';
-
+import Link from 'next/link';
 // Project Card Component
 const ProjectCard = ({ project }) => {
   // Extract fields from the project data structure
@@ -29,7 +29,7 @@ const ProjectCard = ({ project }) => {
 
   return (
 
-
+ 
     <div className="group relative bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-200">
       {/* Subtle Border Animation */}
       <div className="absolute -inset-1 bg-gradient-to-r from-gray-200 via-blue-100 to-gray-200 rounded-2xl blur opacity-0 group-hover:opacity-50 transition duration-300"></div>
@@ -77,7 +77,8 @@ const ProjectCard = ({ project }) => {
           <p className="text-gray-600 text-sm line-clamp-2">
             {description}
           </p>
-
+          
+          
           {/* Tech Stack */}
           <div className="flex flex-wrap gap-1">
             {techstack.map((tech, index) => (
@@ -86,9 +87,29 @@ const ProjectCard = ({ project }) => {
               </span>
             ))}
           </div>
+           <Link href={`/projects/${project.id}`} passHref>
+    <button className="
+      bg-yellow-400 hover:bg-yellow-500 
+      text-gray-900 font-medium 
+      py-1 px-3 text-sm 
+      rounded-lg 
+      shadow-[0_4px_0_rgba(239,68,68,0.7)] 
+      hover:shadow-[0_4px_0_rgba(239,68,68,0.9)] 
+      transform 
+      active:translate-y-1 
+      active:shadow-none 
+      transition-all 
+      duration-200
+      group-hover:scale-105
+      w-[220px] h-[30px]
+    ">
+      View Details
+    </button>
+</Link>
         </div>
       </div>
     </div>
+   
   );
 };
 
