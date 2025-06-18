@@ -162,7 +162,7 @@ const NewlyAddedCards = () => {
           slidesToScroll: 1,
           autoplay: true,
           autoplaySpeed: 3000,
-          arrows: true,
+          arrows: false,
           centerMode: false,
           responsive: [
             {
