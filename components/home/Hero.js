@@ -8,6 +8,7 @@ import "animate.css";
 import Head from "next/head";
 import NewlyAdded from "./NewlyAdded";
 import Navbar from "../Navi";
+import Startselling from "./Startselling"
 import {
   ChevronDown,
   ChevronUp,
@@ -561,8 +562,8 @@ const Hero = () => {
         </div>
 
         {/* Call to Action Section */}
-        <div className="bg-[#E5FFFE] py-16 relative overflow-hidden">
-          {/* Animated background elements */}
+        <Startselling/>
+        {/* <div className="bg-[#E5FFFE] py-16 relative overflow-hidden">
           <div className="absolute inset-0">
             <div className="absolute top-10 left-10 w-20 h-20 bg-yellow-400/20 rounded-full animate-pulse"></div>
             <div
@@ -606,7 +607,7 @@ const Hero = () => {
               </button>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
       <div
         className="bg-gradient-to-b from-yellow-400 to-yellow-400 py-12
